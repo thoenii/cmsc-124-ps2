@@ -38,6 +38,7 @@ R stores matrices by columns, filling each column from top to bottom. The matrix
 
 ## P11
 NA represents a missing value, and mean() returns NA when a missing value is present and na.rm = TRUE has not been specified. The result is [NA] and Its type is double because the input contains NA_real_ and double values. In P12, na.rm = TRUE changes the result by removing the missing value before calculating the mean.
+Correction: I realized the missing value NA still counts one as its length.
 
 ## P12
 Setting na.rm = TRUE tells mean() to remove missing values before calculating. It uses 8 and 10, so the sum is 18 and the denominator is 2, giving 9. The result has type double, length 1, and dimensions none.
@@ -47,6 +48,7 @@ The sequence 1:3 starts as an integer vector. When 2.5 is assigned to position 2
 
 ## P14
 ifelse() chooses a value at each position based on a test. Applying the NA rule, NA * 2 would remain NA throughout the process. The type is double, the length is 4, and the dimensions are none.
+Correction: I applied the NA rule and assumed that NA * 2 would remain NA throughout the process. I also treated ifelse() as a transformation of the whole vector and overlooked how it selects a value at each position based on a test. Additionally, I expected the comparison adjusted > 15 to propagate NA and did not account for how the cap modifies adjusted.
 
 ## P15
 An array is an atomic vector with a dim attribute attached. The values 1:8 are integers, and arranging them into dimensions does not change their type. The array has 8 elements, so its length is 8, and its dimensions are 2 × 2 × 2. Its type is integer.
