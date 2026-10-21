@@ -9,19 +9,16 @@ it copies the input into a double vector and keeps the names. Then the loop
 goes through each position i. If the element at that position is NA, it sets 
 that element to 0. If not, it doubles the score and caps it at 20 using 
 min(2 *out[i], 20). So tracing the same example above we get first pass, i is 1
-and out[i] is 4. It is not NA, so the loop writes min(8, 20), which is 8, and 
-out becomes c(8, NA, 15). On the second pass, i is 2 and out[i] is NA, so
+and we see 4. It is not NA, so the loop writes min(8, 20), which is 8, and 
+out becomes c(8, NA, 15). On the second pass, i is 2 and we see NA, so
 is.na() is true and the loop writes 0, making out c(8, 0, 15). On the third 
-pass, i is 3 and out[i] is 15. Doubling gives 30, but min(30, 20) caps it at 20, 
+pass, i is 3 and we see 15. Doubling gives 30, but min(30, 20) caps it at 20, 
 so out ends as c(8, 0, 20).
-The vector approach operates over the entire vector, and is much more concise.
-Using selectors allowing you to slice and mask on the vector, entire columns 
-and subsets of the data can be manipulated at once. The scalar approach, on 
-the other hand, operates on the individual elements, iterating over each one.
-This is less concise, but offers granular control and potentially being more 
-readable for programmers from a non-R background. Recycling could possibly tip 
-the scales in favor of the vector approach, as it offers functionality that 
-would be awkward to implement with the scalar approach. 
+The vector approach operates on the whole vector at once and is more concise.
+Logical masks and subassignment let it slice and replace many positions in one 
+expression. The scalar approach handles one element per pass, which is longer 
+but gives finer control and may be easier to read for programmers new to R. 
+Recycling is also natural in the vector approach but awkward to reproduce in a loop.
 Ultimately, there is no singular right answer as to which of the two is strictly
 superior. The right answer is on a case-by-case basis. 
 For example, if I were to, say, develop an app in collaboration with programmers 
