@@ -5,6 +5,8 @@ scores vector passed in, say c(4, NA_real_, 15). We run an ifelse, to convert
 NA_real_ to 0 and to double 4 to 8 and 15 to 30. Then, we select all the scores 
 greater than 20 (30) and set them to 20, essentially doing a ceil operation.
 
+[placeholder text! insert clean_scores_scalar() tracing and explanation here:]
+
 The vector approach operates over the entire vector, and is much more concise.
 Using selectors, entire columns and subsets of the data can be manipulated at
 once. The selectors themselves are powerful, allowing you to slice and mask
