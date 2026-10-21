@@ -5,25 +5,33 @@ scores vector passed in, say c(4, NA_real_, 15). We run an ifelse, to convert
 NA_real_ to 0 and to double 4 to 8 and 15 to 30. Then, we select all the scores 
 greater than 20 (30) and set them to 20, essentially doing a ceil operation.
 
-clean_scores_scalar() handles the scores one at a time using a for loop. First, it copies the input into a double vector and keeps the names. Then the loop goes through each position i. If the element at that position is NA, it sets that element to 0. If not, it doubles the score and caps it at 20 using min(2 *out[i], 20). So tracing the same example above we get first pass, i is 1 and out[i] is 4. It is not NA, so the loop writes min(8, 20), which is 8, and out becomes c(8, NA, 15). On the second pass, i is 2 and out[i] is NA, so is.na() is true and the loop writes 0, making out c(8, 0, 15). On the third pass, i is 3 and out[i] is 15. Doubling gives 30, but min(30, 20) caps it at 20, so out ends as c(8, 0, 20).
+clean_scores_scalar() handles the scores one at a time using a for loop. First, 
+it copies the input into a double vector and keeps the names. Then the loop 
+goes through each position i. If the element at that position is NA, it sets 
+that element to 0. If not, it doubles the score and caps it at 20 using 
+min(2 *out[i], 20). So tracing the same example above we get first pass, i is 1
+and out[i] is 4. It is not NA, so the loop writes min(8, 20), which is 8, and 
+out becomes c(8, NA, 15). On the second pass, i is 2 and out[i] is NA, so
+is.na() is true and the loop writes 0, making out c(8, 0, 15). On the third 
+pass, i is 3 and out[i] is 15. Doubling gives 30, but min(30, 20) caps it at 20, 
+so out ends as c(8, 0, 20).
 
 The vector approach operates over the entire vector, and is much more concise.
-Using selectors, entire columns and subsets of the data can be manipulated at
-once. The selectors themselves are powerful, allowing you to slice and mask
-the vector. The scalar approach, on the other hand, operates on the individual
-elements, iterating over each one. This approach is less concise, but offers
-the benefits of granular control and possibly being more readable for other
-programmers from a non-R background. Recycling could possibly tip the scales
-in favor of the vector approach, as it offers a feature that would be awkward
-to implement with the scalar approach. 
+Using selectors allowing you to slice and mask on the vector, entire columns 
+and subsets of the data can be manipulated at once. The scalar approach, on 
+the other hand, operates on the individual elements, iterating over each one.
+This is less concise, but offers granular control and potentially being more 
+readable for programmers from a non-R background. Recycling could possibly tip 
+the scales in favor of the vector approach, as it offers functionality that 
+would be awkward to implement with the scalar approach. 
 
 Ultimately, there is no singular right answer as to which of the two is strictly
 superior. The right answer is on a case-by-case basis. 
 
 For example, if I were to, say, develop an app in collaboration with programmers 
 who have less experience with R, I might go for the scalar approach. If I want 
-more granular control, say, call a method then perform more complex operations for
-every element greater than 20 in a vector, I would lean towards scalar as well since
+more granular control, say, call a method or handle errors for every element 
+greater than 20 in a vector, I would lean towards scalar as well since
 those cases would make the vector implementation awkward or even impossible.
 
 On the other hand, if I wanted to perform alternating addition/subtractions on
