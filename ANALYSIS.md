@@ -9,10 +9,10 @@ it copies the input into a double vector and keeps the names. Then the loop
 goes through each position i. If the element at that position is NA, it sets 
 that element to 0. If not, it doubles the score and caps it at 20 using 
 min(2 *out[i], 20). So tracing the same example above we get first pass, i is 1
-and out[i] is 4. It is not NA, so the loop writes min(8, 20), which is 8, and 
-out becomes c(8, NA, 15). On the second pass, i is 2 and out[i] is NA, so
+and we see 4. It is not NA, so the loop writes min(8, 20), which is 8, and 
+out becomes c(8, NA, 15). On the second pass, i is 2 and we see NA, so
 is.na() is true and the loop writes 0, making out c(8, 0, 15). On the third 
-pass, i is 3 and out[i] is 15. Doubling gives 30, but min(30, 20) caps it at 20, 
+pass, i is 3 and we see 15. Doubling gives 30, but min(30, 20) caps it at 20, 
 so out ends as c(8, 0, 20).
 The vector approach operates over the entire vector, and is much more concise.
 Using selectors allowing you to slice and mask on the vector, entire columns 
