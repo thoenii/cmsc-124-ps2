@@ -4,6 +4,10 @@
 This repository contains the R prediction corpus and the four functions for
 Problem Set 2. The assignment manual defines the work and the submission rules.
 
+## Pair
+
+- Jared Ramyll D. Chua (`ultramarine23`)
+- Marie Toney Fay S. Gelvezon (`thoenii`)
 
 ## Layout
 
