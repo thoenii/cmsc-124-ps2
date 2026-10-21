@@ -26,13 +26,11 @@ to implement with the scalar approach.
 
 Ultimately, there is no singular right answer as to which of the two is strictly
 superior. The right answer is on a case-by-case basis. 
-
 For example, if I were to, say, develop an app in collaboration with programmers 
 who have less experience with R, I might go for the scalar approach. If I want 
-more granular control, say, call a method then perform more complex operations for
-every element greater than 20 in a vector, I would lean towards scalar as well since
+more granular control, say, call a method or handle errors for every element 
+greater than 20 in a vector, I would lean towards scalar as well since
 those cases would make the vector implementation awkward or even impossible.
-
 On the other hand, if I wanted to perform alternating addition/subtractions on
 every element in a vector, or maybe use complex masks to select certain items,
 the vector approach is much more idiomatic.
