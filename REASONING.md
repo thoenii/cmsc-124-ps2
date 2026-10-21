@@ -22,16 +22,16 @@ R uses index starting from 1, and positive indices select values in the requeste
 Negative indexing removes the specified positions. In c(4L, 7L, 9L)[-2L], position 2, which contains 7, is removed. The remaining values are [4,9] in their original order with type integer, length is 2, and the dimensions are none.
 
 ## P06
-The | operator means logical OR, so TRUE | NA gives TRUE because one side is already true. The mask is.na(x) | x > 10L selects the missing value and 12, giving [NA,12]. It returns the values at the selected positions, not the position numbers, because the missing value was created as NA_integer_ and the other value is integer, the result has type integer, length 2, and dimensions none.
+The expression "is.na(x) | x > 10L" inside the square brackets will output TRUE for every value that is either NA or greater than the integer 10, and FALSE otherwise. Here, since we are inserting logical values for every element into the indexing syntax, the program treats it like a mask, and returns the elements at indices where the value is TRUE.
 
 ## P07
-A factor stores integer codes for its categories and uses levels as labels. Therefore, typeof() reports integer. The three observations are low, high, and low, so the length is 3. The levels are ordered as low and high, giving 2 levels.
+Since we plug in the vectors into the factor constructor, our final result is a factor, with two possible values "low" and "high" for each element, and actual values "low", "high" and "low". The type is integer because factors always store values as integers under the hood.
 
 ## P08
-A list can store different types in separate elements without converting them to a common type. This list contains a scores vector and a label, so typeof() reports list and the length is 2. The length counts the top-level elements, not all the values inside them.
+We create a named list with this syntax, which has no unified type among its elements, therefore its type is list. The length being 2 doesn't count the two scores 3 and 5, but rather counts the two "sublists" scores and label. This still doesn't count as a second dimension, however, so the dim stays as none.
 
 ## P09
-A data frame is a list of columns with the same number of rows, and since it is stored as a list of columns, typeof() reports list, while class() reports data.frame. The id column is integer and the passed column is logical. There are 2 columns and 2 rows, so the length is 2 and the dimensions are 2 × 2.
+Data frames can also have mixed element types, therefore the list type. The length also counts id and passed, rather than the inner elements. This time though, there are defined dimensions since id and passed are implicitly treated as columns.
 
 ## P10
 R stores matrices by columns, filling each column from top to bottom, and the matrix stores its values in the order 1,2,3,4,5,6. When c(10L, 20L) is added, recycling adds 10 to stored positions 1, 3, and 5, and 20 to positions 2, 4, and 6, which produces matrix[2x3](11,22,13,24,15,26). The type stays integer because both operands are integer, the length is 6, and the dimensions are 2 × 3.
@@ -44,14 +44,13 @@ Correction: I realized the missing value NA still counts one as its length.
 Setting na.rm = TRUE tells mean() to remove missing values before calculating. It uses 8 and 10, so the sum is 18 and the denominator is 2, giving 9. The result has type double, length 1, and dimensions none.
 
 ## P13
-The sequence 1:3 starts as an integer vector, and when 2.5 is assigned to position 2, R widens the entire vector to double because a vector must store one common type. The existing values are also retyped, giving [1,2.5,3]. The type is double, the length is 3, and the dimensions are none.
+This block creates a vector made up of the numbers 1, 2 and 3, but then assigns the double value 2.5 to the second element. This assignment implicitly changes the vector type to double, and the two other values are coerced.
 
 ## P14
-ifelse() chooses a value at each position based on a test. Applying the NA rule, NA * 2 would remain NA throughout the process. The type is double, the length is 4, and the dimensions are none.
-Correction: I applied the NA rule and assumed that NA * 2 would remain NA throughout the process. I also treated ifelse() as a transformation of the whole vector and overlooked how it selects a value at each position based on a test. Additionally, I expected the comparison adjusted > 15 to propagate NA and did not account for how the cap modifies adjusted.
+This block first creates a scores vector with type double, due to the lack of L next to the numbers. We then create a new vector, adjusted, which iterates through every score using is.na(scores), and then changing the value using an ifelse. The value becomes 0 if NA, and gets doubled otherwise. Finally, all scores over 15 are ceilinged at 15. The length and type never change, and there were no dimensions in the first place, due to both being regular vectors.
 
 ## P15
-An array is an atomic vector with a dim attribute attached. The values 1:8 are integers, and arranging them into dimensions does not change their type, and the array has 8 elements, so its length is 8, and its dimensions are 2 × 2 × 2. Its type is integer.
+This is an array initializer using the values 1 to 8 (inclusive), and the dimensions are explicitly defined as 2x2x2. The resulting array is therefore three dimensional, with length 8.
 
 ## P16
-R indexing starts at position 1, so index 0L selects nothing. The result is an empty vector [] that keeps the original integer type. Its length is 0, and its dimensions are none.
+The inside of the square bracket is a zero, therefore it accesses none of the elements inside the vector. The result is an empty vector, but with the integer type since the source vector is also integer type.
